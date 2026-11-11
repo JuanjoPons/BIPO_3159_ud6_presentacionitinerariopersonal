@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mi itinerario personal · UD6</title>
+<meta name="description" content="MBIPO (3159) Itinerario personal para la empleabilidad · UD6 · Guía paso a paso para crear el plan de itinerario personal (RA4).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+/* ds-allow-hardcode: archivo autónomo sin sistema de diseño; los tokens están en :root y los SVG en línea repiten esos mismos valores */
+:root{
+  --violeta:#5B5BE0; --violeta-osc:#4343C8; --lunar:#7676EE;
+  --coral:#FF7A50; --coral-txt:#D9481F;
+  --tinta:#1F1A3D; --tinta-2:#4A4466; --papel:#FFFFFF; --crema:#FFF4EE;
+  --t-titulo:"Baloo 2","Arial Rounded MT Bold",system-ui,sans-serif;
+  --t-mano:"Patrick Hand","Comic Neue","Segoe Print",system-ui,sans-serif;
+  --r:18px;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--violeta);color:var(--tinta);font-family:var(--t-mano);font-size:clamp(17px,1.35vw + .55rem,24px);line-height:1.35;overflow:hidden}
+.skip{position:absolute;left:-999px;top:8px;background:var(--papel);color:var(--tinta);padding:8px 14px;border-radius:999px;z-index:50}
+.skip:focus{left:8px}
+:focus-visible{outline:4px solid var(--tinta);outline-offset:3px;box-shadow:0 0 0 7px #fff}
+
+/* ---------- escenario ---------- */
+.deck{position:relative;height:100dvh;width:100%;overflow:hidden}
+.lunares{position:absolute;inset:0;pointer-events:none;opacity:.55;
+  background-image:radial-gradient(circle,var(--lunar) 0 5px,transparent 6px),radial-gradient(circle,var(--lunar) 0 3px,transparent 4px);
+  background-size:96px 88px,58px 64px;background-position:12px 20px,40px 4px}
+.slide{position:absolute;inset:0;display:grid;grid-template-columns:minmax(220px,38%) 1fr;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s .35s}
+.slide.activa{opacity:1;visibility:visible;transition:opacity .35s ease}
+.escena{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 12px 96px}
+.escena svg.figura{width:min(78%,300px);height:auto;max-height:62vh}
+.pildora{display:inline-flex;align-items:center;gap:.4em;margin-top:14px;background:var(--coral);color:var(--tinta);font-family:var(--t-titulo);font-weight:800;letter-spacing:.02em;font-size:clamp(1.1rem,2vw,1.7rem);padding:.25em 1.1em .15em;border-radius:999px;border:3px solid var(--tinta);box-shadow:0 5px 0 var(--tinta);text-decoration:none;cursor:pointer;text-transform:uppercase}
+a.pildora:hover{transform:translateY(-2px);box-shadow:0 7px 0 var(--tinta)}
+.panel{position:relative;background:var(--papel);padding:clamp(28px,4.5vh,64px) clamp(22px,4vw,72px) 110px clamp(56px,7vw,120px);overflow-y:auto;overscroll-behavior:contain}
+.panel::before{content:"";position:absolute;left:-1px;top:0;bottom:0;width:clamp(60px,8vw,130px);background:var(--violeta);
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0 0H100C40 22 10 45 30 70S80 96 72 100H0Z'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat;
+          mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M0 0H100C40 22 10 45 30 70S80 96 72 100H0Z'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat}
+.panel>.borde{position:absolute;left:-1px;top:0;height:100%;width:clamp(60px,8vw,130px);pointer-events:none}
+.panel-in{position:relative;max-width:900px}
+.marca{font-family:var(--t-titulo);font-weight:600;font-size:.72em;color:var(--tinta-2);margin:0 0 .3em}
+h1,h2{font-family:var(--t-titulo);font-weight:800;color:var(--coral-txt);text-transform:uppercase;line-height:1;margin:0 0 .45em;letter-spacing:.01em}
+h1{font-size:clamp(2.2rem,5.6vw,4.6rem)}
+h2{font-size:clamp(1.8rem,4vw,3.4rem)}
+h1:focus,h2:focus{outline:none}
+h3{font-family:var(--t-titulo);font-weight:800;font-size:1.05em;margin:.6em 0 .2em;color:var(--tinta)}
+p{margin:.35em 0 .7em}
+.enf{position:relative;display:inline}
+.enf{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M3 14C50 6 120 4 197 9' fill='none' stroke='%23FF7A50' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E") left bottom/100% .38em no-repeat;padding-bottom:.12em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.trazos{position:absolute;width:clamp(60px,7vw,110px);height:auto;top:9%;right:6%}
+.panel{display:flex;flex-direction:column}
+.panel-in{margin-block:auto;width:100%}
+
+/* listas pregunta */
+.preguntas{list-style:none;padding:0;margin:.4em 0;display:grid;gap:.25em}
+.preguntas li{display:flex;align-items:center;justify-content:space-between;gap:1em;border-bottom:2px dashed #E6E3F3;padding:.2em 0}
+.preguntas a{color:var(--tinta);text-decoration:none;font-size:1.12em;padding:.15em 0}
+.preguntas a:hover{text-decoration:underline;text-decoration-color:var(--coral);text-decoration-thickness:3px}
+.q{flex:0 0 auto;width:1.65em;height:1.65em;border-radius:50%;background:var(--coral);border:2.5px solid var(--tinta);display:grid;place-items:center;font-family:var(--t-titulo);font-weight:800;color:var(--tinta);line-height:1}
+
+/* tarjetas */
+.rejilla{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin:.6em 0}
+.tarjeta{border:3px solid var(--tinta);border-radius:var(--r);padding:14px 16px;background:var(--papel);box-shadow:5px 5px 0 var(--violeta)}
+.tarjeta h3{margin-top:0}
+.tarjeta.coral{background:var(--crema);box-shadow:5px 5px 0 var(--coral)}
+.chip{display:inline-block;font-family:var(--t-titulo);font-weight:800;font-size:.7em;background:var(--violeta-osc);color:#fff;border-radius:999px;padding:.1em .7em;margin-bottom:.3em}
+.nota{font-size:.85em;color:var(--tinta-2)}
+.cita{border-left:6px solid var(--coral);padding:.2em .9em;margin:.6em 0;background:var(--crema);border-radius:0 12px 12px 0}
+
+/* mapa de unidades */
+.mapa{list-style:none;padding:0;margin:.5em 0;display:grid;gap:8px}
+.mapa li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start}
+.mapa .ud{font-family:var(--t-titulo);font-weight:800;background:var(--violeta-osc);color:#fff;border-radius:12px;padding:.15em .6em;min-width:4.2em;text-align:center;border:2.5px solid var(--tinta)}
+.mapa li.hoy .ud{background:var(--coral);color:var(--tinta)}
+.mapa b{font-family:var(--t-titulo)}
+
+/* DAFO */
+.dafo{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:.5em 0}
+.dafo .fila{grid-column:1/-1;font-family:var(--t-titulo);font-weight:800;font-size:.75em;color:var(--tinta-2);margin:.2em 0 -.3em}
+.dafo button{font:inherit;text-align:left;border:3px solid var(--tinta);border-radius:16px;padding:12px 14px;background:var(--papel);color:var(--tinta);cursor:pointer;min-height:84px}
+.dafo button .l{font-family:var(--t-titulo);font-weight:800;font-size:1.05em;display:flex;justify-content:space-between;gap:8px}
+.dafo button .d{display:block;margin-top:.3em}
+.dafo button[aria-expanded="false"] .d{display:none}
+.dafo button.int{box-shadow:5px 5px 0 var(--violeta)}
+.dafo button.ext{box-shadow:5px 5px 0 var(--coral)}
+
+/* escalera */
+.escalera{list-style:none;padding:0;margin:.6em 0;counter-reset:p}
+.escalera li{counter-increment:p;position:relative;border:3px solid var(--tinta);border-radius:16px;padding:10px 14px 10px 3.2em;margin-bottom:10px;background:var(--papel)}
+.escalera li:nth-child(2){margin-left:6%}.escalera li:nth-child(3){margin-left:12%}
+.escalera li::before{content:counter(p);position:absolute;left:.55em;top:50%;transform:translateY(-50%);width:1.8em;height:1.8em;border-radius:50%;background:var(--coral);border:2.5px solid var(--tinta);display:grid;place-items:center;font-family:var(--t-titulo);font-weight:800}
+
+/* checklist */
+.check{list-style:none;padding:0;margin:.5em 0;display:grid;gap:8px}
+.check label{display:flex;gap:.7em;align-items:flex-start;cursor:pointer;border:3px solid var(--tinta);border-radius:14px;padding:8px 12px;background:var(--papel)}
+.check input{appearance:none;-webkit-appearance:none;flex:0 0 auto;width:1.25em;height:1.25em;margin-top:.1em;border:3px solid var(--tinta);border-radius:6px;background:#fff;display:grid;place-items:center;cursor:pointer}
+.check input:checked{background:var(--coral)}
+.check input:checked::after{content:"";width:.55em;height:.3em;border-left:3px solid var(--tinta);border-bottom:3px solid var(--tinta);transform:rotate(-45deg) translate(1px,-1px)}
+.check input:checked+span{text-decoration:line-through;text-decoration-color:var(--coral);text-decoration-thickness:3px}
+.progreso-check{font-family:var(--t-titulo);font-weight:800;color:var(--tinta-2);font-size:.85em}
+
+/* diana */
+.diana-wrap{display:grid;grid-template-columns:minmax(180px,260px) 1fr;gap:18px;align-items:center}
+.diana svg{width:100%;height:auto}
+.diana-leyenda{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.diana-leyenda li{border:3px solid var(--tinta);border-radius:14px;padding:6px 12px;font-size:.84em;line-height:1.25}
+.diana-leyenda .nivel{margin-top:4px}
+.diana-leyenda .nivel button{min-width:40px;min-height:40px}
+.compacta .panel-in{font-size:.8em}
+.diana-leyenda .n{font-family:var(--t-titulo);font-weight:800}
+.nivel{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
+.nivel button{font:inherit;font-family:var(--t-titulo);font-weight:800;min-width:44px;min-height:44px;border:2.5px solid var(--tinta);border-radius:999px;background:#fff;color:var(--tinta);cursor:pointer}
+.nivel button[aria-pressed="true"]{background:var(--coral)}
+
+/* RA */
+.ra{border:3px solid var(--tinta);border-radius:var(--r);padding:14px 18px;background:var(--crema);margin:.4em 0 .8em}
+.lista-letras{list-style:none;padding:0;margin:.3em 0;display:grid;gap:6px}
+.lista-letras li{display:grid;grid-template-columns:2em 1fr;gap:.5em;align-items:start}
+.lista-letras .q{width:1.6em;height:1.6em;font-size:.9em}
+
+/* navegación */
+.nav{position:fixed;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px clamp(10px,2vw,22px) max(10px,env(safe-area-inset-bottom));z-index:20;pointer-events:none}
+.nav>*{pointer-events:auto}
+.btn-nav{width:52px;height:52px;border-radius:50%;border:3px solid var(--tinta);background:var(--coral);color:var(--tinta);cursor:pointer;box-shadow:0 4px 0 var(--tinta);display:grid;place-items:center;padding:0}
+.btn-nav:disabled{background:#ECEAF5;color:#6B6685;cursor:default;box-shadow:0 4px 0 #6B6685;border-color:#6B6685}
+.btn-nav svg{width:24px;height:24px}
+.centro{display:flex;align-items:center;gap:10px;background:var(--papel);border:3px solid var(--tinta);border-radius:999px;padding:6px 8px 6px 14px;max-width:calc(100% - 140px)}
+.contador{font-family:var(--t-titulo);font-weight:800;white-space:nowrap;font-size:.85rem}
+.barra{width:clamp(60px,18vw,240px);height:10px;border-radius:999px;background:#E6E3F3;overflow:hidden;border:2px solid var(--tinta)}
+.barra i{display:block;height:100%;width:0;background:var(--coral);transition:width .3s}
+.btn-indice{font-family:var(--t-titulo);font-weight:800;font-size:.85rem;border:2.5px solid var(--tinta);border-radius:999px;background:var(--violeta-osc);color:#fff;padding:.35em .9em;cursor:pointer;min-height:40px}
+dialog.indice{border:3px solid var(--tinta);border-radius:22px;padding:18px 20px;max-width:min(560px,92vw);width:100%;max-height:82vh;color:var(--tinta);font-family:var(--t-mano);font-size:1.05rem}
+dialog.indice::backdrop{background:rgba(31,26,61,.6)}
+dialog.indice ol{padding-left:1.6em;margin:.4em 0}
+dialog.indice a{color:var(--tinta);display:block;padding:.3em 0}
+dialog.indice a[aria-current="true"]{color:var(--tinta);font-weight:700;text-decoration-color:var(--coral);text-decoration-thickness:4px}
+.cerrar{float:right;font:inherit;border:2.5px solid var(--tinta);border-radius:999px;background:#fff;color:var(--tinta);padding:.2em .8em;cursor:pointer;min-height:40px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- móvil ---------- */
+@media (max-width:820px){
+  .slide{grid-template-columns:1fr;grid-template-rows:auto 1fr}
+  .escena{padding:12px 16px 2px;flex-direction:row;gap:14px;justify-content:flex-start}
+  .escena svg.figura{width:70px;max-height:none}
+  .escena .pildora{margin-top:0;font-size:1rem}
+  .trazos{display:none}
+  .panel{padding:40px 18px 120px}
+  .panel::before{width:100%;height:30px;top:-1px;left:0;bottom:auto;
+    -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'%3E%3Cpath d='M0 0H100V2C70 9 30 -2 0 7Z'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat;
+            mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'%3E%3Cpath d='M0 0H100V2C70 9 30 -2 0 7Z'/%3E%3C/svg%3E") 0 0/100% 100% no-repeat}
+  .panel>.borde{display:none}
+  .diana-wrap{grid-template-columns:1fr}
+  .diana svg{max-width:260px;margin:0 auto;display:block}
+  .barra{display:none}
+  .escalera li:nth-child(n){margin-left:0}
+}
+@media (max-width:440px){.dafo{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media print{
+  body{overflow:visible;background:#fff}
+  .deck{height:auto;overflow:visible}
+  .slide{position:relative;opacity:1;visibility:visible;break-after:page;min-height:100vh}
+  .nav,.lunares{display:none}
+  .panel{overflow:visible}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#s1">Saltar al contenido</a>
+
+<!-- símbolos reutilizables (dibujo propio) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="fig" viewBox="0 0 240 420">
+      <g fill="#fff" stroke="#1F1A3D" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M120 22c26-1 40 17 39 41-1 24-17 40-39 40s-39-17-39-41c0-23 14-39 39-40z"/>
+        <path d="M96 104c-18 2-31 9-38 20l-30-70c-3-9-15-8-16 1-1 7 3 13 6 20l30 82c6 13 16 16 22 12l6-4-4 128c-1 22-2 52-6 78-1 9 4 13 13 13h28c7 0 9-6 9-12l6-118 6 118c0 6 2 12 9 12h29c9 0 13-4 12-13-5-26-6-56-7-78l-4-130c8 5 15 9 20 18 8 14 12 30 2 42-6 7-2 14 6 12 16-4 22-22 18-40-5-24-22-44-50-54-12-4-24-6-35-6z"/>
+        <path d="M24 46c-6-12-2-22 4-24 7-2 10 6 9 12" fill="none"/>
+      </g>
+    </symbol>
+    <symbol id="trazos" viewBox="0 0 120 110">
+      <g fill="#fff" stroke="#1F1A3D" stroke-width="6" stroke-linejoin="round">
+        <path d="M58 8l22-2-6 50-14 2z"/>
+        <path d="M14 34l18-10 22 34-12 10z"/>
+        <path d="M4 82l6-16 40 6-4 14z"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<main class="deck" id="deck" aria-roledescription="presentación" aria-label="Guía paso a paso del itinerario personal, unidad 6">
+<div class="lunares" aria-hidden="true"></div>
+
+<!-- 1 PORTADA -->
+<section class="slide" id="s1" data-glifo="?" data-pildora="Empiezo…" aria-label="Portada">
+  <div class="escena"></div>
+  <div class="panel"><div class="panel-in">
+    <svg class="trazos" viewBox="0 0 120 110" aria-hidden="true"><use href="#trazos"/></svg>
+    <p class="marca">MBIPO (3159) · Itinerario personal para la empleabilidad · Unidad 6</p>
+    <h1>¿Hacia dónde voy?</h1>
+    <p>Guía paso a paso para crear tu <span class="enf">plan de itinerario personal</span>.</p>
+    <ul class="preguntas" aria-label="Los cinco pasos del plan">
+      <li><a href="#s4">¿Quién soy y qué me motiva?</a><span class="q" aria-hidden="true">1</span></li>
+      <li><a href="#s7">¿Qué opciones educativas y profesionales tengo?</a><span class="q" aria-hidden="true">2</span></li>
+      <li><a href="#s8">¿Qué perfil y qué meta elijo?</a><span class="q" aria-hidden="true">3</span></li>
+      <li><a href="#s9">¿Cómo me acerco a la búsqueda de empleo?</a><span class="q" aria-hidden="true">4</span></li>
+      <li><a href="#s10">¿Cómo lo reúno, lo presento y lo evalúo?</a><span class="q" aria-hidden="true">5</span></li>
+    </ul>
+    <p class="nota">Usa las flechas ← → del teclado, los botones de abajo o desliza el dedo en el móvil.</p>
+  </div></div>
+</section>
+
+<!-- 2 QUÉ ES -->
+<section class="slide" id="s2" data-glifo="?" data-pildora="Mi plan" aria-label="Qué es el itinerario personal">
+  <div class="escena"></div>
+  <div class="panel"><div class="panel-in">
+    <h2>¿Qué es mi itinerario?</h2>
+    <p>El diseño del itinerario personal es una herramienta fundamental para planificar tu futuro y trazar tu propia hoja de ruta académica y profesional.</p>
+    <p>A lo largo del curso escolar, este plan te ayuda a conocerte de forma más profunda, a tomar conciencia de tus cualidades, habilidades y conocimientos, y a establecer un propósito de vida basado en objetivos realistas.</p>
+    <div class="rejilla">
+      <div class="tarjeta"><span class="chip">Al principio</span><h3>Ser un plan</h3><p>Una intencionalidad inicial.</p></div>
+      <div class="tarjeta coral"><span class="chip">Al final</span><h3>Tener un plan</h3><p>Una configuración práctica y estructurada.</p></div>
+    </div>
+    <p class="cita">Es un documento <b>dinámico</b> de uso exclusivamente personal: a medida que cumplas metas o surjan nuevos intereses en tu vida, podrás actualizarlo y mejorarlo.</p>
+  </div></div>
+</section>
+
+<!-- 3 MAPA -->
+<section class="slide" id="s3" data-glifo="?" data-pildora="Mi ruta" aria-label="Mapa de trabajo por unidades">
+  <div class="escena"></div>
+  <div class="panel"><div class="panel-in">
+    <h2>Mapa de trabajo</h2>
+    <p>El trabajo no se realiza todo al final: se construye secuencialmente desde el inicio del curso.</p>
+    <ol class="mapa">
+      <li><span class="ud">UD 1</span><span><b>Autoconocimiento y exploración de intereses.</b> Reflexión inicial sobre motivación y proyecto de vida.</span></li>
+      <li><span class="ud">UD 2</span><span><b>1.1. Rasgos de personalidad.</b> Análisis de cualidades personales e identidad.</span></li>
+      <li><span class="ud">UD 3</span><span><b>1.2. Habilidades sociales.</b> Evaluación de competencias relacionales y de comunicación.</span></li>
+      <li><span class="ud">UD 4</span><span><b>1.3. Análisis DAFO personal · 2.1. Test de orientación GR.</b> Diagnóstico interno/externo y realización del Test Gran Recorrido.</span></li>
+      <li><span class="ud">UD 5</span><span><b>3. Perfil y meta profesional · 4. Ocupaciones asociadas · Plan de búsqueda de empleo.</b> Toma de decisiones, elección de itinerarios, investigación laboral y reto de búsqueda de empleo.</span></li>
+      <li class="hoy"><span class="ud">UD 6</span><span><b>5. Encuadernación, presentación y evaluación.</b> Compilación del plan final, exposición oral y autoevaluación. <span class="chip">Estamos aquí</span></span></li>
+    </ol>
+  </div></div>
+</section>
+
+<!-- 4 PASO 1 -->
+<section class="slide" id="s4" data-glifo="1" data-pildora="Soy…" aria-label="Paso 1: autoconocimiento">
+  <div class="escena"></div>
+  <div class="panel"><div class="panel-in">
+    <p class="marca">Paso 1 de 5</p>
+    <h2>Autoconocimiento y diagnóstico</h2>
+    <p>Mira hacia dentro para descubrir <span class="enf">quién eres, qué te motiva y de qué recursos dispones</span> antes de tomar decisiones sobre el entorno laboral.</p>
+    <div class="tarjeta">
+      <h3>1.1. Rasgos de personalidad y habilidades sociales</h3>
+      <p>Revisa tus cualidades personales y evalúa tus hábitos de relación interpersonal. Comprender tus fortalezas de personalidad y tus habilidades sociales te ayuda a determinar en qué entornos de trabajo te sentirás más cómodo y eficiente.</p>
+    </div>
+  </div></div>
+</section>
+
+<!-- 5 DAFO -->
+<section class="slide" id="s5" data-glifo="1" data-pildora="Mi DAFO" aria-label="Paso 1: matriz DAFO personal">
+  <div class="escena"></div>
+  <div class="panel"><div class="panel-in">
+    <p class="marca">Paso 1 · 1.2</p>
+    <h2>Matriz DAFO personal</h2>
+    <p>Clasifica los elementos que influyen en tu desarrollo profesional. <span class="nota">Pulsa cada casilla para ver qué va dentro.</span></p>
+    <div class="dafo">
+      <p class="fila">Interno</p>
+      <button class="int" aria-expanded="false"><span class="l">Fortalezas <span aria-hidden="true">+</span></span><span class="d">Tus talentos, conocimientos y virtudes destacadas.</span></button>
+      <button class="int" aria-expanded="false"><span class="l">Debilidades <span aria-hidden="true">+</span></span><span class="d">Tus puntos de mejora o limitaciones actuales.</span></button>
+      <p class="fila">Externo</p>
+      <button class="ext" aria-expanded="false"><span class="l">Oportunidades <span aria-hidden="true">+</span></span><span class="d">Factores del entorno o del sistema educativo que favorecen tu crecimiento.</span></button>
+      <button class="ext" aria-expanded="false"><span class="l">Amenazas <span aria-hidden="true">+</span></span><span class="d">Desafíos o dificultades del mercado sociolaboral que deberás prevenir.</span></button>
+    </div>
+  </div></div>
+</section>
+
+<!-- 6 RETOS -->
+<section class="slide" id="s6" data-glifo="1" data-pildora="Reflexiono" aria-label="Paso 1: retos de reflexión">
+  <div class="escena"></div>
+  <div class="panel"><div class="panel-in">
+    <p class="marca">Paso 1 · 1.3</p>
+    <h2>Retos de reflexión</h2>
+    <p>Incorpora a esta sección los retos prácticos desarrollados durante las primeras unidades:</p>
+    <div class="rejilla">
+      <div class="tarjeta">
+        <svg viewBox="0 0 100 100" width="64" height="64" aria-hidden="true"><circle cx="50" cy="50" r="42" fill="#fff" stroke="#1F1A3D" stroke-width="5"/><g stroke="#1F1A3D" stroke-width="3"><path d="M50 8V92M8 50H92M20 20L80 80M80 20L20 80"/></g><path d="M50 50L50 18A32 32 0 0 1 72 28Z" fill="#FF7A50" stroke="#1F1A3D" stroke-width="3"/><path d="M50 50L82 50A32 32 0 0 0 72 28Z" fill="#5B5BE0" stroke="#1F1A3D" stroke-width="3"/></svg>
+        <h3>La Rueda de la Vida</h3><p>Evaluación gráfica de tu equilibrio personal.</p></div>
+      <div class="tarjeta coral">
+        <svg viewBox="0 0 100 100" width="64" height="64" aria-hidden="true"><g stroke="#1F1A3D" stroke-width="4"><circle cx="38" cy="38" r="24" fill="#FF7A50" fill-opacity=".5"/><circle cx="62" cy="38" r="24" fill="#5B5BE0" fill-opacity=".45"/><circle cx="38" cy="62" r="24" fill="#5B5BE0" fill-opacity=".25"/><circle cx="62" cy="62" r="24" fill="#FF7A50" fill-opacity=".3"/></g></svg>
+        <h3>El Ikigai</h3><p>Análisis de intersección entre pasión, vocación, profesión y misión.</p></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- 7 PASO 2 -->
+<section class="slide" id="s7" data-glifo="2" data-pildora="Exploro" aria-label="Paso 2: opciones educativas y profesionales">
+  <div class="escena"></div>
+  <div class="panel"><div class="panel-in">
+    <p class="marca">Paso 2 de 5</p>
+    <h2>Opciones educativas y profesionales</h2>
+    <p>Conecta tus intereses con las <span class="enf">oportunidades reales</span> del entorno formativo y laboral.</p>
+    <div class="rejilla">
+      <div class="tarjeta"><span class="chip">UD 4</span><h3>2.1. Test de orientación GR (Gran Recorrido)</h3><p>Te proporciona un informe objetivo sobre las familias profesionales y los itinerarios académicos que mejor se alinean con tus preferencias manifestadas.</p></div>
+      <div class="tarjeta coral"><span class="chip">A partir del test</span><h3>2.2. Ocupaciones asociadas</h3><p>Investiga las profesiones y ocupaciones del mercado sociolaboral actual. Analiza los requisitos de acceso, los itinerarios formativos necesarios y las competencias requeridas en las salidas laborales de tu interés.</p></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- 8 PASO 3 -->
+<section class="slide" id="s8" data-glifo="3" data-pildora="Decido" aria-label="Paso 3: perfil profesional y toma de decisiones">
+  <div class="escena"></div>
+  <div class="panel"><div class="panel-in">
+    <p class="marca">Paso 3 de 5</p>
+    <h2>Perfil profesional y decisiones</h2>
+    <p>Transforma la información recogida en <span class="enf">decisiones concretas</span> sobre tu futuro.</p>
+    <ol class="escalera">
+      <li><b>Decisión del perfil profesional:</b> elige de forma argumentada el perfil o área profesional en la que deseas especializarte.</li>
+      <li><b>Definición de la meta profesional:</b> establece con claridad tu objetivo final a largo plazo y las ocupaciones concretas asociadas a las que quieres aspirar.</li>
+      <li><b>Objetivos realistas:</b> traza metas alcanzables a corto y medio plazo que funcionen como peldaños intermedios para alcanzar tu meta final.</li>
+    </ol>
+  </div></div>
+</section>
+
+<!-- 9 PASO 4 -->
+<section class="slide" id="s9" data-glifo="4" data-pildora="Busco" aria-label="Paso 4: plan de aproximación a la búsqueda de empleo">
+  <div class="escena"></div>
+  <div class="panel"><div class="panel-in">
+    <p class="marca">Paso 4 de 5</p>
+    <h2>Plan de búsqueda de empleo</h2>
+    <p>Incluye el <b>Plan de Aproximación a la Búsqueda de Empleo</b> que desarrollaste en el reto profesional de la Unidad 5. Debe detallar:</p>
+    <div class="rejilla">
+      <div class="tarjeta"><h3>Estrategias de búsqueda activa</h3><p>Selección de portales de empleo, webs de empresas y bolsas de trabajo especializadas.</p></div>
+      <div class="tarjeta coral"><h3>Documentos de presentación</h3><p>Adaptación de tu currículum vitae y carta de presentación a la meta elegida.</p></div>
+      <div class="tarjeta"><h3>Networking y canales informales</h3><p>Identificación de contactos y eventos del sector sociolaboral.</p></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- 10 PASO 5.1 -->
+<section class="slide" id="s10" data-glifo="5" data-pildora="Reúno" aria-label="Paso 5: encuadernación del producto final">
+  <div class="escena"></div>
+  <div class="panel"><div class="panel-in">
+    <p class="marca">Paso 5 de 5 · 5.1</p>
+    <h2>Encuaderno mi plan</h2>
+    <p>Encuaderna y estructura todo tu trabajo (en formato <b>físico o digital</b>) reuniendo los ejercicios y retos del curso en un único documento coherente. <span class="nota">Marca lo que ya tienes:</span></p>
+    <ul class="check" data-clave="encuadernado">
+      <li><label><input type="checkbox"><span>Memoria de autoconocimiento (Personalidad, Habilidades Sociales y DAFO).</span></label></li>
+      <li><label><input type="checkbox"><span>Anexos de retos personales (Rueda de la Vida e Ikigai).</span></label></li>
+      <li><label><input type="checkbox"><span>Informe de orientación (Test GR y Ocupaciones asociadas).</span></label></li>
+      <li><label><input type="checkbox"><span>Plan de actuación (Perfil profesional y Meta definida).</span></label></li>
+      <li><label><input type="checkbox"><span>Plan de aproximación a la búsqueda de empleo.</span></label></li>
+    </ul>
+    <p class="progreso-check" aria-live="polite">0 de 5 apartados listos</p>
+  </div></div>
+</section>
+
+<!-- 11 PASO 5.2 -->
+<section class="slide" id="s11" data-glifo="5" data-pildora="Lo cuento" aria-label="Paso 5: exposición oral">
+  <div class="escena"></div>
+  <div class="panel"><div class="panel-in">
+    <p class="marca">Paso 5 · 5.2</p>
+    <h2>Exposición oral</h2>
+    <p>Como cierre, expondrás tu proyecto ante tus compañeros y docentes para compartir tus <span class="enf">conclusiones y tu visión de futuro</span>. Elige una de estas dos formas:</p>
+    <div class="rejilla">
+      <div class="tarjeta coral"><span class="chip">Opción A</span><h3>Elevator pitch</h3><p>Un discurso breve, directo y persuasivo.</p></div>
+      <div class="tarjeta"><span class="chip">Opción B</span><h3>Vídeo grabado previamente</h3><p>La proyección de un vídeo en el que expliques tu itinerario.</p></div>
+    </div>
+  </div></div>
+</section>
+
+<!-- 12 PASO 5.3 DIANA -->
+<section class="slide compacta" id="s12" data-glifo="5" data-pildora="Me evalúo" aria-label="Paso 5: diana de autoevaluación">
+  <div class="escena"></div>
+  <div class="panel"><div class="panel-in">
+    <p class="marca">Paso 5 · 5.3</p>
+    <h2>Diana de autoevaluación</h2>
+    <p>Valora cuatro dimensiones clave. <span class="nota">Prueba aquí: puntúa de 1 (borde) a 4 (centro). La diana oficial es descargable en la web de Editex.</span></p>
+    <div class="diana-wrap">
+      <div class="diana"><svg viewBox="0 0 220 220" role="img" id="dianaSvg" aria-label="Diana de autoevaluación"></svg></div>
+      <ul class="diana-leyenda" id="dianaLeyenda">
+        <li data-i="0"><span class="n">01. Planificación y plazos</span> · gestión del tiempo<br>¿He planificado mis tareas y he cumplido con los plazos establecidos?</li>
+        <li data-i="1"><span class="n">02. Redacción y tareas</span> · calidad del documento<br>¿He redactado el documento final obteniendo los resultados esperados de cada tarea?</li>
+        <li data-i="2"><span class="n">03. Consecución de objetivos</span> · eficiencia del plan<br>¿He conseguido los objetivos establecidos y he diseñado un plan para alcanzarlos?</li>
+        <li data-i="3"><span class="n">04. Presentación ante la clase</span> · exposición oral<br>¿He presentado el itinerario personal de forma clara y concisa?</li>
+      </ul>
+    </div>
+  </div></div>
+</section>
+
+<!-- 13 PASO 5.4 -->
+<section class="slide" id="s13" data-glifo="5" data-pildora="Pienso" aria-label="Paso 5: valoración final de reflexión">
+  <div class="escena"></div>
+  <div class="panel"><div class="panel-in">
+    <p class="marca">Paso 5 · 5.4</p>
+    <h2>Valoración final</h2>
+    <p>Concluye tu autoevaluación respondiendo honestamente a estas cinco preguntas:</p>
+    <ul class="preguntas">
+      <li><span>¿Te sientes satisfecho con tu plan de itinerario personal?</span><span class="q" aria-hidden="true">?</span></li>
+      <li><span>¿Te ha ayudado a conocerte mejor a ti mismo para saber lo que quieres en la vida?</span><span class="q" aria-hidden="true">?</span></li>
+      <li><span>¿Tienes más claro tu futuro académico y profesional después de preparar tu plan que antes de su elaboración?</span><span class="q" aria-hidden="true">?</span></li>
+      <li><span>¿Qué has aprendido realizando tu plan?</span><span class="q" aria-hidden="true">?</span></li>
+      <li><span>¿Podrías ir mejorando tu plan en el futuro? ¿De qué manera?</span><span class="q" aria-hidden="true">?</span></li>
+    </ul>
+  </div></div>
+</section>
+
+<!-- 14 CIERRE -->
+<section class="slide" id="s14" data-glifo="!" data-pildora="¡Sigo!" aria-label="Cierre">
+  <div class="escena"></div>
+  <div class="panel"><div class="panel-in">
+    <svg class="trazos" viewBox="0 0 120 110" aria-hidden="true"><use href="#trazos"/></svg>
+    <h2>Un plan que sigue vivo</h2>
+    <p style="font-size:1.25em">Este plan no termina al finalizar el curso. Tu itinerario personal es una <span class="enf">herramienta viva</span> que te acompañará y se adaptará a lo largo de toda tu trayectoria académica y profesional.</p>
+  </div></div>
+</section>
+
+<!-- 15 RA -->
+<section class="slide compacta" id="s15" data-glifo="RA" data-pildora="RA4" aria-label="Resultado de aprendizaje, criterios y competencias">
+  <div class="escena"></div>
+  <div class="panel"><div class="panel-in">
+    <p class="marca">Qué se evalúa en esta unidad</p>
+    <h2>Resultado de aprendizaje</h2>
+    <div class="ra"><b>RA4.</b> Pon en marcha un itinerario propio analizando las diferentes opciones educativas y profesionales, valorando las ventajas e inconvenientes de cada una y examinando las que mejor se ajustan a sus posibilidades y preferencias.</div>
+    <h3>Criterios de evaluación</h3>
+    <ul class="lista-letras">
+      <li><span class="q" aria-hidden="true">a</span><span><span class="sr">a) </span>Se han valorado las ventajas e inconvenientes de cada una de las opciones posibles.</span></li>
+      <li><span class="q" aria-hidden="true">b</span><span><span class="sr">b) </span>Se han analizado y seleccionado las opciones que más se ajustan a sus perfiles profesionales.</span></li>
+      <li><span class="q" aria-hidden="true">c</span><span><span class="sr">c) </span>Se ha realizado un proceso de toma de decisiones identificando el itinerario académico y profesional personal, a partir de sus preferencias profesionales, intereses y metas en el marco de un proyecto profesional.</span></li>
+    </ul>
+    <h3>Competencias de empleabilidad evaluadas en esta unidad</h3>
+    <ul class="lista-letras">
+      <li><span class="q" aria-hidden="true">k</span><span><span class="sr">k) </span>Resolver problemas predecibles relacionados con su entorno físico, social, personal y productivo.</span></li>
+      <li><span class="q" aria-hidden="true">s</span><span><span class="sr">s) </span>Cumplir las tareas propias de su nivel con autonomía y responsabilidad</span></li>
+      <li><span class="q" aria-hidden="true">w</span><span><span class="sr">w) </span>Actuar con espíritu emprendedor, iniciativa personal y responsabilidad en la elección de los procedimientos profesionales.</span></li>
+      <li><span class="q" aria-hidden="true">l</span><span><span class="sr">l) </span>Actuar de forma saludable en diferentes contextos cotidianos que favorezcan el desarrollo personal y social.</span></li>
+    </ul>
+    <p class="nota">Fuente: documento «Resultado de aprendizaje Unidad 6» (texto literal).</p>
+  </div></div>
+</section>
+
+<!-- 16 RÚBRICA -->
+<section class="slide" id="s16" data-glifo="10" data-pildora="Rúbrica" aria-label="Rúbrica de valoración">
+  <div class="escena"></div>
+  <div class="panel"><div class="panel-in">
+    <p class="marca">Cómo se valorará tu itinerario</p>
+    <h2>Rúbrica de valoración</h2>
+    <p>El profesorado valorará tu itinerario en tres dimensiones. Cada aspecto tiene cuatro niveles: 1 Insuficiente · 2 Suficiente · 3 Bien · 4 Excelente.</p>
+    <div class="rejilla">
+      <div class="tarjeta"><span class="chip">50 %</span><h3>Contenido</h3><p>Los cinco apartados del documento encuadernado y las decisiones argumentadas (criterios a, b y c).</p></div>
+      <div class="tarjeta coral"><span class="chip">20 %</span><h3>Formato</h3><p>Documento único y coherente, redacción, orden y presentación (física o digital), entrega en plazo.</p></div>
+      <div class="tarjeta"><span class="chip">30 %</span><h3>Presentación y defensa</h3><p>Elevator pitch o vídeo claro y conciso, defensa de tus decisiones y autoevaluación.</p></div>
+    </div>
+    <a class="pildora" href="UD6_Rubrica_Itinerario_personal.html" target="_blank" rel="noopener">Ver la rúbrica completa</a>
+  </div></div>
+</section>
+</main>
+
+<nav class="nav" aria-label="Navegación de diapositivas">
+  <button class="btn-nav" id="prev" aria-label="Diapositiva anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4L7 12l8 8" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <div class="centro">
+    <span class="contador" id="contador" aria-live="polite">1 / 16</span>
+    <span class="barra" aria-hidden="true"><i id="barra"></i></span>
+    <button class="btn-indice" id="btnIndice" aria-haspopup="dialog">Índice</button>
+  </div>
+  <button class="btn-nav" id="next" aria-label="Diapositiva siguiente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+</nav>
+
+<dialog class="indice" id="indice" aria-labelledby="tIndice">
+  <button class="cerrar" id="cerrarIndice">Cerrar</button>
+  <h2 id="tIndice" style="font-size:1.6rem">Índice</h2>
+  <ol id="listaIndice"></ol>
+</dialog>
+
+<script>
+(function(){
+  const slides=[...document.querySelectorAll('.slide')];
+  const N=slides.length;
+  const $=id=>document.getElementById(id);
+  let i=0;
+
+  // figura + píldora en cada diapositiva, y borde curvo del panel
+  slides.forEach((s,k)=>{
+    const g=s.dataset.glifo||'?', p=s.dataset.pildora||'';
+    const fs=g.length>1?46:66;
+    s.querySelector('.escena').innerHTML=
+      '<svg class="figura" viewBox="0 0 240 420" aria-hidden="true"><use href="#fig"/>'+
+      '<text x="122" y="'+(g.length>1?190:202)+'" text-anchor="middle" font-family="Baloo 2, Arial Rounded MT Bold, sans-serif" font-weight="800" font-size="'+fs+'" fill="#FF7A50" stroke="#1F1A3D" stroke-width="2.5" paint-order="stroke">'+g+'</text></svg>'+
+      '<span class="pildora" aria-hidden="true">'+p+'</span>';
+    const tz=s.querySelector('.panel .trazos');if(tz)s.querySelector('.escena').appendChild(tz);
+    s.setAttribute('role','group');
+    s.setAttribute('aria-roledescription','diapositiva');
+    s.dataset.titulo=s.getAttribute('aria-label');
+    s.setAttribute('aria-label',(k+1)+' de '+N+': '+s.dataset.titulo);
+    s.querySelector('.panel').insertAdjacentHTML('afterbegin','<svg class="borde" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M100 0C40 22 10 45 30 70S80 96 72 100" fill="none" stroke="#1F1A3D" vector-effect="non-scaling-stroke" style="stroke-width:7px"/></svg>');
+    s.inert=true;
+  });
+
+  const li=$('listaIndice');
+  slides.forEach((s,k)=>li.insertAdjacentHTML('beforeend','<li><a href="#s'+(k+1)+'">'+s.dataset.titulo+'</a></li>'));
+
+  function ir(n,foco){
+    n=Math.max(0,Math.min(N-1,n));
+    slides[i].classList.remove('activa');slides[i].inert=true;
+    i=n;
+    const s=slides[i];s.classList.add('activa');s.inert=false;
+    $('contador').textContent=(i+1)+' / '+N;
+    $('barra').style.width=((i+1)/N*100)+'%';
+    $('prev').disabled=i===0;$('next').disabled=i===N-1;
+    s.querySelector('.panel').scrollTop=0;
+    li.querySelectorAll('a').forEach((a,k)=>{if(k===i)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')});
+    if(location.hash!=='#s'+(i+1))history.replaceState(null,'','#s'+(i+1));
+    if(foco){const h=s.querySelector('h1,h2');h.setAttribute('tabindex','-1');h.focus({preventScroll:true})}
+  }
+
+  $('prev').onclick=()=>ir(i-1);
+  $('next').onclick=()=>ir(i+1);
+  document.addEventListener('keydown',e=>{
+    if($('indice').open)return;
+    const t=e.target.tagName;
+    if(t==='INPUT'||t==='TEXTAREA'||t==='SELECT')return;
+    if(e.key==='ArrowRight'||e.key==='PageDown'||(e.key===' '&&t!=='BUTTON'&&t!=='A')){e.preventDefault();ir(i+1,true)}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();ir(i-1,true)}
+    else if(e.key==='Home'){e.preventDefault();ir(0,true)}
+    else if(e.key==='End'){e.preventDefault();ir(N-1,true)}
+  });
+  document.addEventListener('click',e=>{
+    const a=e.target.closest('a[href^="#s"]');if(!a)return;
+    const n=parseInt(a.getAttribute('href').slice(2),10);
+    if(n>=1&&n<=N){e.preventDefault();if($('indice').open)$('indice').close();ir(n-1,true)}
+  });
+  window.addEventListener('hashchange',()=>{const n=parseInt(location.hash.slice(2),10);if(n>=1&&n<=N&&n-1!==i)ir(n-1)});
+  let x0=null,y0=null;
+  document.addEventListener('touchstart',e=>{x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
+  document.addEventListener('touchend',e=>{if(x0===null)return;const dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;
+    if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5)ir(i+(dx<0?1:-1));x0=null},{passive:true});
+  $('btnIndice').onclick=()=>{$('indice').showModal();const c=li.querySelector('[aria-current="true"]');c&&c.focus()};
+  $('cerrarIndice').onclick=()=>$('indice').close();
+
+  // DAFO
+  document.querySelectorAll('.dafo button').forEach(b=>b.addEventListener('click',()=>{
+    const o=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',String(!o));
+    b.querySelector('.l span').textContent=o?'+':'−';
+  }));
+
+  // checklist con guardado local opcional
+  document.querySelectorAll('.check').forEach(ul=>{
+    const k='ud6-'+ul.dataset.clave, cajas=[...ul.querySelectorAll('input')], out=ul.nextElementSibling;
+    let g=[];try{g=JSON.parse(localStorage.getItem(k)||'[]')}catch(_){}
+    cajas.forEach((c,n)=>{c.checked=!!g[n]});
+    const act=()=>{const v=cajas.filter(c=>c.checked).length;
+      out.textContent=v===cajas.length?'¡Documento completo! 5 de 5 apartados listos':v+' de '+cajas.length+' apartados listos';
+      try{localStorage.setItem(k,JSON.stringify(cajas.map(c=>c.checked)))}catch(_){}};
+    cajas.forEach(c=>c.addEventListener('change',act));act();
+  });
+
+  // diana interactiva
+  const svg=$('dianaSvg'),ley=$('dianaLeyenda'),val=[0,0,0,0],cx=110,cy=110,R=[100,78,56,34];
+  const nombres=['Planificación y plazos','Redacción y tareas','Consecución de objetivos','Presentación ante la clase'];
+  const P=(r,a)=>[(cx+r*Math.cos(a)).toFixed(2),(cy+r*Math.sin(a)).toFixed(2)];
+  function sector(r1,r0,a0,a1){const [x1,y1]=P(r1,a0),[x2,y2]=P(r1,a1);
+    if(!r0)return 'M'+cx+' '+cy+'L'+x1+' '+y1+'A'+r1+' '+r1+' 0 0 1 '+x2+' '+y2+'Z';
+    const [x3,y3]=P(r0,a1),[x4,y4]=P(r0,a0);
+    return 'M'+x1+' '+y1+'A'+r1+' '+r1+' 0 0 1 '+x2+' '+y2+'L'+x3+' '+y3+'A'+r0+' '+r0+' 0 0 0 '+x4+' '+y4+'Z'}
+  function pintar(){
+    let h='';
+    for(let s=0;s<4;s++){const a0=-Math.PI/2+s*Math.PI/2,a1=a0+Math.PI/2;
+      for(let n=0;n<4;n++){const on=val[s]>=n+1;
+        h+='<path d="'+sector(R[n],R[n+1]||0,a0,a1)+'" fill="'+(on?(s%2?'#5B5BE0':'#FF7A50'):(n%2?'#F3F1FB':'#fff'))+'" stroke="#1F1A3D" stroke-width="2.5"/>'}}
+    ['01','02','03','04'].forEach((t,s)=>{const [x,y]=P(89,-Math.PI/4+s*Math.PI/2-Math.PI/2+Math.PI/2);
+      h+='<text x="'+x+'" y="'+(+y+5)+'" text-anchor="middle" font-family="Baloo 2,sans-serif" font-weight="800" font-size="14" fill="#1F1A3D" stroke="#fff" stroke-width="3" paint-order="stroke">'+t+'</text>'});
+    h+='<circle cx="110" cy="110" r="6" fill="#1F1A3D"/>';
+    svg.innerHTML=h;
+    svg.setAttribute('aria-label','Diana de autoevaluación: '+nombres.map((n,k)=>n+', '+(val[k]?val[k]+' de 4':'sin puntuar')).join('; '));
+  }
+  ley.querySelectorAll('li').forEach(el=>{
+    const s=+el.dataset.i,box=document.createElement('div');
+    box.className='nivel';box.setAttribute('role','group');box.setAttribute('aria-label','Puntuación de '+nombres[s]);
+    for(let n=1;n<=4;n++){const b=document.createElement('button');b.type='button';b.textContent=n;b.setAttribute('aria-pressed','false');b.setAttribute('aria-label',nombres[s]+': '+n+' de 4');
+      b.onclick=()=>{val[s]=val[s]===n?0:n;box.querySelectorAll('button').forEach((x,k)=>x.setAttribute('aria-pressed',String(val[s]===k+1)));pintar()};
+      box.appendChild(b)}
+    el.appendChild(box);
+  });
+  pintar();
+
+  const n0=parseInt((location.hash||'').slice(2),10);
+  ir(n0>=1&&n0<=N?n0-1:0);
+})();
+</script>
+</body>
+</html>
